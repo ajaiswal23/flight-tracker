@@ -1,0 +1,39 @@
+/* src/App.css */
+h1, h2 {
+  text-align: center;
+}
+
+p {
+  text-align: center;
+  font-size: 1.25rem;
+}
+
+table {
+  width: 80%;
+  margin: 20px auto;
+  border-collapse: collapse;
+}
+
+th, td {
+  padding: 10px;
+  border: 1px solid #ddd;
+  text-align: center;
+}
+
+.remark-landed, .remark-boarding {
+  color: green;
+
+}
+
+.remark-ontime {
+  color: blue;
+}
+
+.remark-departed {
+  color: red;
+}
+
+.remark-gateclosed {
+  color: orange;
+}
+
