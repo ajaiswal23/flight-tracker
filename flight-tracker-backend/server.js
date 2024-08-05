@@ -22,7 +22,7 @@ app.get("/api/flights", async (req, res) => {
     const currentTime = moment().subtract(30, "minutes").format("HH:mm:ss");
     const futureTime = moment().add(4, "hours").format("HH:mm:ss");
 
-    // console.log(currentTime, futureTime);
+    console.log(currentTime, futureTime);
     // Get all the flights that are departing in the next 4 hours
     const currentHour = moment().hour();
     if (currentHour >= 20) {
