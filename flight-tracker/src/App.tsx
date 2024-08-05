@@ -25,14 +25,8 @@ const App: React.FC = () => {
         // Debugging log
         // console.log('Fetched flights:', flights);
 
-        if (Array.isArray(flights)) {
-          setArrivals(flights.filter((flight) => flight.type === "arrival"));
-          setDepartures(
-            flights.filter((flight) => flight.type === "departure")
-          );
-        } else {
-          console.error("Fetched data is not an array:", flights);
-        }
+        setArrivals(flights.filter((flight) => flight.type === "arrival"));
+        setDepartures(flights.filter((flight) => flight.type === "departure"));
       } catch (error) {
         console.error("Error fetching flight data:", error);
       }

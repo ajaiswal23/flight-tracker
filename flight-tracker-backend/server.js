@@ -22,15 +22,40 @@ app.get("/api/flights", async (req, res) => {
     const currentTime = moment().subtract(30, "minutes").format("HH:mm:ss");
     const futureTime = moment().add(4, "hours").format("HH:mm:ss");
 
+    // console.log(currentTime, futureTime);
     // Get all the flights that are departing in the next 4 hours
-    const { data, error } = await supabase
-      .from("flights")
-      .select("*")
-      .gte("time", currentTime)
-      .lte("time", futureTime);
+    const currentHour = moment().hour();
+    if (currentHour >= 20) {
+      const { data: pastData, error: pastError } = await supabase
+        .from("flights")
+        .select("*")
+        .gte("time", currentTime)
+        .lte("time", "24:00:00");
 
+      const { data: futureData, error: futureError } = await supabase
+        .from("flights")
+        .select("*")
+        .gte("time", "00:00:00")
+        .lte("time", futureTime);
 
-    res.json(data);
+      if (pastError || futureError) {
+        throw new Error(pastError || futureError);
+      }
+
+      const allData = [...pastData, ...futureData];
+      // console.log("pastData", pastData);
+      // console.log("futureData", futureData);
+      res.json(allData);
+    } else {
+      const { data, error } = await supabase
+        .from("flights")
+        .select("*")
+        .gte("time", currentTime)
+        .lte("time", futureTime);
+
+      // console.log(data);
+      res.json(data);
+    }
   } catch (error) {
     res.status(500).json({ error: error.message });
   }
