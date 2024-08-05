@@ -57,7 +57,7 @@ app.get("/api/flights", async (req, res) => {
         .lte("time", futureTime);
 
       // console.log(data);
-      res.json(data);
+      res.json(currentTime.toString() + " " + futureTime.toString());
     }
   } catch (error) {
     res.status(500).json({ error: error.message });
