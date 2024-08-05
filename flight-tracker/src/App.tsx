@@ -20,14 +20,13 @@ const App: React.FC = () => {
       // console.log("url:", apiUrl);
       try {
         const response = await axios.get(`${apiUrl}api/flights`);
-        console.log(response.data);
         const flights: Flight[] = response.data;
 
         // Debugging log
         // console.log('Fetched flights:', flights);
 
-        // setArrivals(flights.filter((flight) => flight.type === "arrival"));
-        // setDepartures(flights.filter((flight) => flight.type === "departure"));
+        setArrivals(flights.filter((flight) => flight.type === "arrival"));
+        setDepartures(flights.filter((flight) => flight.type === "departure"));
       } catch (error) {
         console.error("Error fetching flight data:", error);
       }
