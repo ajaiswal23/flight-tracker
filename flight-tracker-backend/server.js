@@ -1,13 +1,10 @@
-
+// server.js
 require("dotenv").config();
 
 const express = require("express");
 const cors = require("cors");
 const { createClient } = require("@supabase/supabase-js");
 const moment = require("moment");
-const momentTz = require("moment-timezone");
-
-momentTz.tz.setDefault("Asia/Kolkata");
 
 const app = express();
 const port = 3001;
@@ -25,7 +22,7 @@ app.get("/api/flights", async (req, res) => {
     const currentTime = moment().subtract(30, "minutes").format("HH:mm:ss");
     const futureTime = moment().add(4, "hours").format("HH:mm:ss");
 
-    console.log(currentTime, futureTime);
+    // console.log(currentTime, futureTime);
     // Get all the flights that are departing in the next 4 hours
     const currentHour = moment().hour();
     if (currentHour >= 20) {
@@ -57,7 +54,7 @@ app.get("/api/flights", async (req, res) => {
         .lte("time", futureTime);
 
       // console.log(data);
-      res.json(currentTime.toString() + " " + futureTime.toString());
+      res.json(data);
     }
   } catch (error) {
     res.status(500).json({ error: error.message });
