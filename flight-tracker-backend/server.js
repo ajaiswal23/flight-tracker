@@ -5,7 +5,9 @@ const express = require("express");
 const cors = require("cors");
 const { createClient } = require("@supabase/supabase-js");
 const moment = require("moment");
-moment.tz.setDefault("IST"); 
+const momentTz = require("moment-timezone");
+
+momentTz.tz.setDefault("Asia/Kolkata");
 
 const app = express();
 const port = 3001;
