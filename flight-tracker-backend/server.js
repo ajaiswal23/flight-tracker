@@ -1,4 +1,5 @@
-// server.js
+
+moment.tz.setDefault("IST"); 
 require("dotenv").config();
 
 const express = require("express");
